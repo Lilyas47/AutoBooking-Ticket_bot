@@ -1,16 +1,31 @@
-# This is a sample Python script.
+from Parse_url import *
+from search_coordinates import *
+from Screenshoting_tickets import *
+from Booking_tickets import *
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+def menu(prices, colors):
+    print("Выберите цену: ")
+    for price in range(len(prices)):
+        print(price + 1, prices[price])
+    selected_price = input()
+    print("Сейчас вам потребуется ввести ваши данные, сделайте это внимательно!")
+    print("Введите ваше ФИО: ")
+    user_name = input()
+    print("Введите ваше номер телефона: ")
+    user_phone_number = input()
+    print("Введите вашу почту: ")
+    user_email = input()
+    return user_name, user_phone_number, user_email
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+print("Скопируйте ссылку на ваше мероприятие: ")
+url = input()
 
+url = change_url_to_clean(url)
+prices, colors = parse_prices(url)
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+user_name, user_phone_number, user_email = menu(prices, colors)
+make_screenshot(url)
+dots = search_coord()
+book(url, dots, user_name, user_phone_number, user_email)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
